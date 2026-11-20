@@ -1,0 +1,16 @@
+# Godot 4
+.godot/
+.import/
+.export/
+export.cfg
+export_presets.cfg
+*.translation
+# Android signing material
+*.keystore
+*.jks
+key.properties
+# Build output
+build/
+dist/
+*.apk
+*.aab
