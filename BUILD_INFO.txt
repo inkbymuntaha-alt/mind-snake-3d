@@ -1,0 +1,4 @@
+Engine: Godot 4.7.2 stable (GDScript)
+Renderer: Compatibility (mobile-friendly)
+Export: Android arm64 debug APK
+Package: com.musagames.mindsnake3d
