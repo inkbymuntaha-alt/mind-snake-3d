@@ -49,16 +49,21 @@ func _build_arena_visuals() -> void:
     floor.material_override = floor_material
     floor.position.y = 0.0
     add_child(floor)
-    var grid_mesh := GridMesh.new()
-    grid_mesh.size = Vector2(14.8, 14.8)
-    grid_mesh.cell_size = Vector2(0.82, 0.82)
+    var grid_mesh := ImmediateMesh.new()
+    grid_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+    for line_index in range(19):
+        var offset: float = -7.38 + float(line_index) * 0.82
+        grid_mesh.surface_add_vertex(Vector3(offset, 0.015, -7.38))
+        grid_mesh.surface_add_vertex(Vector3(offset, 0.015, 7.38))
+        grid_mesh.surface_add_vertex(Vector3(-7.38, 0.015, offset))
+        grid_mesh.surface_add_vertex(Vector3(7.38, 0.015, offset))
+    grid_mesh.surface_end()
     var grid := MeshInstance3D.new()
     grid.mesh = grid_mesh
     var grid_mat := StandardMaterial3D.new()
-    grid_mat.albedo_color = Color(0.12, 0.4, 0.48, 0.35)
+    grid_mat.albedo_color = Color(0.12, 0.4, 0.48, 0.65)
     grid_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
     grid.material_override = grid_mat
-    grid.position.y = 0.012
     add_child(grid)
     _add_boundary_walls()
 
