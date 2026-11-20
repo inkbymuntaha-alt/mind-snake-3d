@@ -48,6 +48,7 @@ class SnakeRenderer(private val context:Context):GLSurfaceView.Renderer {
  private var uFog=0
  private var uFogColor=0
 
+ fun togglePause() { if(phase==Phase.PLAYING) phase=Phase.PAUSED else if(phase==Phase.PAUSED) phase=Phase.PLAYING; last=System.nanoTime() }
  fun turn(x:Int,z:Int) {
   if(phase==Phase.TITLE || phase==Phase.GAME_OVER){ start(); return }
   if(phase!=Phase.PLAYING || (x==0 && z==0)) return
