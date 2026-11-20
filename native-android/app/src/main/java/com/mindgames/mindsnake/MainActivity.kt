@@ -30,6 +30,7 @@ class MainActivity : Activity() {
   root.addView(gl,FrameLayout.LayoutParams(-1,-1))
   hud=TextView(this).apply { setTextColor(Color.WHITE); textSize=16f; setPadding(20,24,12,12); text="MIND SNAKE • SWIPE TO START" }
   root.addView(hud,FrameLayout.LayoutParams(-1,-2,Gravity.TOP))
+  hud.setOnClickListener { gl.queueEvent { game.togglePause() } }
   val pad=LinearLayout(this).apply { gravity=Gravity.CENTER; setPadding(8,8,8,20) }
   val dirs=listOf(-1 to 0,0 to -1,0 to 1,1 to 0)
   listOf("←","↑","↓","→").forEachIndexed { i,label ->
