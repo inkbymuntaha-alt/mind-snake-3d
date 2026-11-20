@@ -49,7 +49,7 @@ func _build_ui() -> void:
     menu_panel = _panel(root)
     _add_title(menu_panel, "MIND SNAKE", "CONTROL YOUR MIND.\nSURVIVE THE NOISE.")
     _add_button_center(menu_panel, "PLAY", 0.58, _start_game)
-    _add_small_text(menu_panel, "CLARITY CALMS YOU  •  IMPULSE REWARDS YOU", 0.73)
+    _add_small_text(menu_panel, "SWIPE ANYWHERE TO STEER  •  CLARITY CALMS YOU", 0.73)
     pause_panel = _panel(root)
     _add_title(pause_panel, "PAUSED", "TAKE A BREATH.")
     _add_button_center(pause_panel, "RESUME", 0.58, _pause_game)
@@ -67,27 +67,35 @@ func _label(text_value: String, font_size: int, pos: Vector2, box_size: Vector2)
     label.size = box_size
     label.add_theme_font_size_override("font_size", font_size)
     label.add_theme_color_override("font_color", Color(0.82, 0.96, 1.0))
+    label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
     return label
 
 func _panel(parent: Control) -> Control:
     var panel := ColorRect.new()
-    panel.color = Color(0.015, 0.025, 0.065, 0.94)
+    panel.color = Color(0.015, 0.025, 0.065, 0.84)
     panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     parent.add_child(panel)
     return panel
 
 func _add_title(panel: Control, title_text: String, subtitle: String) -> void:
-    var title := _label(title_text, 38, Vector2.ZERO, Vector2(680, 90))
+    var title_size := 32 if title_text == "MIND OVERLOADED" else 38
+    var title := _label(title_text, title_size, Vector2.ZERO, Vector2.ZERO)
     title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
     title.anchor_left = 0.0
     title.anchor_right = 1.0
+    title.offset_left = 12
+    title.offset_right = -12
     title.offset_top = 230
     title.offset_bottom = 320
     panel.add_child(title)
-    var sub := _label(subtitle, 17, Vector2.ZERO, Vector2(680, 80))
+    var sub := _label(subtitle, 17, Vector2.ZERO, Vector2.ZERO)
     sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    sub.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
     sub.anchor_left = 0.0
     sub.anchor_right = 1.0
+    sub.offset_left = 16
+    sub.offset_right = -16
     sub.offset_top = 330
     sub.offset_bottom = 410
     panel.add_child(sub)
@@ -128,12 +136,16 @@ func _add_button_center(panel: Control, caption: String, y_ratio: float, callbac
     button.pressed.connect(callback)
 
 func _add_small_text(panel: Control, text_value: String, y_ratio: float) -> void:
-    var label := _label(text_value, 13, Vector2.ZERO, Vector2(680, 35))
+    var label := _label(text_value, 13, Vector2.ZERO, Vector2.ZERO)
     label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
     label.anchor_left = 0.0
     label.anchor_right = 1.0
+    label.offset_left = 12
+    label.offset_right = -12
     label.anchor_top = y_ratio
     label.anchor_bottom = y_ratio
+    label.offset_bottom = 35
     panel.add_child(label)
 
 func _add_dpad(parent: Control) -> void:
